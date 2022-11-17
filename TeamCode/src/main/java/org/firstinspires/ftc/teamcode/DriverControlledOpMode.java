@@ -102,15 +102,13 @@ public class DriverControlledOpMode extends LinearOpMode {
 
         // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
-            //double y = -gamepad1.right_stick_y;
-            //double x = gamepad1.right_stick_x;
-            if (Math.abs(gamepad1.left_stick_x) < 0.1 && Math.abs(gamepad1.left_stick_y) < 0.1 && Math.abs(gamepad1.right_stick_x) < 0.1 && Math.abs(gamepad1.right_stick_y) < 0.1) {
+            if (Math.abs(gamepad1.left_stick_x) + Math.abs(gamepad1.left_stick_y) + Math.abs(gamepad1.right_stick_x) + Math.abs(gamepad1.right_stick_y) == 0.0) {
                 drive.drive(gamepad2.right_stick_x * 0.3, gamepad2.right_stick_y * 0.3, gamepad2.left_stick_x * 0.3, gamepad2.left_stick_y * 0.3);
             } else {
                 drive.drive(gamepad1.right_stick_x, gamepad1.right_stick_y, gamepad1.left_stick_x, gamepad1.left_stick_y);
             }
 
-            if (gamepad2.dpad_up) {
+            /* if (gamepad2.dpad_up) {
                 arm.up();
             } else {
                 arm.neutral();
@@ -127,7 +125,7 @@ public class DriverControlledOpMode extends LinearOpMode {
                 arm.close();
             }
 
-            /*if (gamepad1.dpad_up) {
+            if (gamepad1.dpad_up) {
                 arm.up();
             } else {
                 arm.neutral();
@@ -142,13 +140,13 @@ public class DriverControlledOpMode extends LinearOpMode {
                 arm.open();
             } else {
                 arm.close();
-            }*/
+            }
 
             if (gamepad1.left_bumper) {
                 carousel.on();
             } else {
                 carousel.off();
-            }
+            } */
 
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
