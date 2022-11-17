@@ -102,33 +102,9 @@ public class AutoSafeOpMode extends LinearOpMode {
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
-        // Right side of robot touching wall
-        // Drive back 1.5 feet
-        // turn on carousel
-        // wait a few seconds
-        // drive left 1.5 ft
-        // cease, halt, desist, end, park
 
-        /*runtime.reset();
-        drive.drive(0, 1, 0, 1);
-        carousel.on();
-        while (runtime.milliseconds() < 1000) { }
-        drive.drive(0, 0, 0, 0);
-
-        runtime.reset();
-        while (runtime.milliseconds() < 3500) { }
-
-        runtime.reset();
-        drive.drive(-1, 0, -1, 0);
-        while (runtime.milliseconds() < 1000) { }
-        drive.drive(0, 0, 0, 0);
-        arm.open();
-
-        carousel.off();*/
 
         while (opModeIsActive()) {
-
             // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
