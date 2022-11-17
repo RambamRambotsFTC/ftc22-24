@@ -17,6 +17,13 @@ apply from: '../build.dependencies.gradle'
 
 android {
     namespace = 'org.firstinspires.ftc.teamcode'
+
+    def Properties properties = new Properties()
+    properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+    defaultConfig {
+        resValue 'string', 'vuforia_key', properties.getProperty('vuforia.key', '')
+    }
 }
 
 dependencies {

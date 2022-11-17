@@ -1,9 +1,11 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
+import android.content.res.Resources;
+
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import java.util.List;
+
 import org.firstinspires.ftc.robotcore.external.ClassFactory;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer;
 import org.firstinspires.ftc.robotcore.external.navigation.VuforiaLocalizer.CameraDirection;
@@ -13,7 +15,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "TensorFlow Lite Detection", group = "tensorflow")
 public class TensorFlow extends LinearOpMode {
-    private static final String VUFORIA_KEY = "AZ8VOyP/////AAABmcpEbuL3CkmYnWI/rPhA/TtFls65F5hhw8FW3nf8f4tmcBgXKgsUxqm9hr15rLLNVRMsYuWyoAplHo7SVysGSlu4LIvmaFtXpWukIVTcnlXLLtTyyCUnQzzw5Xu5TW2pz+Pnz28n03qLkD927rW3KTVRvQguR4L1s6kz9xTrl2oJZ8V2vutGQo+uLYDJewTUggkpHHrKTj3viTz5oJBPyFJ1XM6KNvrl47fSaFkBzHy8WuaMIJF9E+TQAxmD1V/J/Jw8Eje5/Hi3ktCJBSqx0xbuNjc/SHSJIQTat5ISIdaHZCUOJTLpieyKP7JkEsJFvKa7eJfyUIpjAPvlShqUXN2IrSa8jT8eCbu2c6z9O8OX";
+    private static final String VUFORIA_KEY = Resources.getSystem().getString(R.string.vuforia_key);
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfod;
 
