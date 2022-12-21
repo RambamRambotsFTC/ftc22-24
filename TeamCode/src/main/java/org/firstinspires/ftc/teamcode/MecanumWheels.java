@@ -13,10 +13,10 @@ class MecanumWheels {
     private double frontLeftPower = 0;
     private DcMotor backRight;
     private double backRightPower = 0;
-    private CRServo backLeft;
+    private DcMotor backLeft;
     private double backLeftPower = 0;
 
-    public MecanumWheels (CRServo leftBack, DcMotor leftFront, DcMotor rightBack, DcMotor rightFront){
+    public MecanumWheels (DcMotor leftBack, DcMotor leftFront, DcMotor rightBack, DcMotor rightFront){
         // sets the local motors to Graber's motors
         frontRight = rightFront;
         frontLeft = leftFront;
@@ -59,7 +59,7 @@ class MecanumWheels {
         frontRight.setPower(FR);
         frontLeft.setPower(FL);
         backRight.setPower(BR);
-        backLeft.setPower(BL);
+        backLeft.setPower(-BL);
     }
 //        if (rx < 0.25 && rx > -0.25 && lx > -0.25 && lx < 0.25) {
 //            frontRight.setPower(-ry);

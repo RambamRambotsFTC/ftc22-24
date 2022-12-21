@@ -56,18 +56,11 @@ package org.firstinspires.ftc.teamcode;
 public class DriverControlledOpMode extends LinearOpMode {
 
     private MecanumWheels drive;
-    private Arm arm;
-    private Carousel carousel;
 
-    private CRServo leftBackMotor;
+    private DcMotor leftBackMotor;
     private DcMotor leftFrontMotor;
     private DcMotor rightBackMotor;
     private DcMotor rightFrontMotor;
-
-    private Servo armServo;
-    private DcMotor carouselMotor;
-
-    private CRServo armMotor;
 
     // Declare OpMode members.
     private ElapsedTime runtime = new ElapsedTime();
@@ -80,21 +73,14 @@ public class DriverControlledOpMode extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftBackMotor = hardwareMap.get(CRServo.class, "leftBackMotor");
+        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
         leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
         rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
 
-        armServo = hardwareMap.get(Servo.class, "armServo");
-        carouselMotor = hardwareMap.get(DcMotor.class, "carouselMotor");
-
-        armMotor = hardwareMap.get(CRServo.class, "armMotor");
-
 
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
-        arm = new Arm(armServo, armMotor);
-        carousel = new Carousel(carouselMotor);
 
         // Wait for the game to start (driver presses PLAY)
         waitForStart();

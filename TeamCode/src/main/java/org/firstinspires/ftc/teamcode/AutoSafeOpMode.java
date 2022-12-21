@@ -61,7 +61,7 @@ public class AutoSafeOpMode extends LinearOpMode {
     private Arm arm;
     private Carousel carousel;
 
-    private CRServo leftBackMotor;
+    private DcMotor leftBackMotor;
     private DcMotor leftFrontMotor;
     private DcMotor rightBackMotor;
     private DcMotor rightFrontMotor;
@@ -82,7 +82,7 @@ public class AutoSafeOpMode extends LinearOpMode {
         // Initialize the hardware variables. Note that the strings used here as parameters
         // to 'get' must correspond to the names assigned during the robot configuration
         // step (using the FTC Robot Controller app on the phone).
-        leftBackMotor = hardwareMap.get(CRServo.class, "leftBackMotor");
+        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
         leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
         rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
