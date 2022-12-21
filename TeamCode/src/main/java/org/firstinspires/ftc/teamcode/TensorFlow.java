@@ -15,7 +15,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 @TeleOp(name = "TensorFlow Lite Detection", group = "tensorflow")
 public class TensorFlow extends LinearOpMode {
-    private static final String VUFORIA_KEY = Resources.getSystem().getString(R.string.vuforia_key);
+    private static final String VUFORIA_KEY = ""; // Insert Vuforia Key
     private VuforiaLocalizer vuforia;
     private TFObjectDetector tfod;
 
