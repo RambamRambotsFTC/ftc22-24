@@ -30,39 +30,26 @@
 package org.firstinspires.ftc.teamcode;
         import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
         import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
-        import com.qualcomm.robotcore.eventloop.opmode.Disabled;
         import com.qualcomm.robotcore.hardware.Servo;
         import com.qualcomm.robotcore.hardware.CRServo;
         import com.qualcomm.robotcore.hardware.DcMotor;
         import com.qualcomm.robotcore.util.ElapsedTime;
-        import com.qualcomm.robotcore.util.Range;
         import java.lang.Math;
-
-
-/**
- * This file contains an minimal example of a Linear "OpMode". An OpMode is a 'program' that runs in either
- * the autonomous or the teleop period of an FTC match. The names of OpModes appear on the menu
- * of the FTC Driver Station. When an selection is made from the menu, the corresponding OpMode
- * class is instantiated on the Robot Controller and executed.
- *
- * This particular OpMode just executes a basic Tank Drive Teleop for a two wheeled robot
- * It includes all the skeletal structure that all linear OpModes contain.
- *
- * Use Android Studios to Copy this Class, and Paste it into your team's code folder with a new name.
- * Remove or comment out the @Disabled line to add this opmode to the Driver Station OpMode list
- */
 
 @TeleOp(name="Driver OpMode", group="Linear Opmode")
 public class DriverControlledOpMode extends LinearOpMode {
-
     private MecanumWheels drive;
+    private Arm arm;
 
-    private DcMotor leftBackMotor;
+    private CRServo leftBackMotor;
     private DcMotor leftFrontMotor;
     private DcMotor rightBackMotor;
     private DcMotor rightFrontMotor;
 
-    // Declare OpMode members.
+    private Servo armServo;
+    private DcMotor armMotor1;
+    private CRServo armMotor2;
+
     private ElapsedTime runtime = new ElapsedTime();
 
     @Override
@@ -70,23 +57,21 @@ public class DriverControlledOpMode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        // Initialize the hardware variables. Note that the strings used here as parameters
-        // to 'get' must correspond to the names assigned during the robot configuration
-        // step (using the FTC Robot Controller app on the phone).
-        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
+        drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
+        arm = new Arm(armServo, armMotor1, armMotor2);
+
+        leftBackMotor = hardwareMap.get(CRServo.class, "leftBackMotor");
         leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
         rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
 
+        armServo = hardwareMap.get(Servo.class, "armServo");
+        armMotor1 = hardwareMap.get(DcMotor.class, "armMotor1");
+        armMotor2 = hardwareMap.get(CRServo.class, "armMotor2");
 
-
-        drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
-
-        // Wait for the game to start (driver presses PLAY)
         waitForStart();
         runtime.reset();
 
-        // run until the end of the match (driver presses STOP)
         while (opModeIsActive()) {
             if (Math.abs(gamepad1.left_stick_x) + Math.abs(gamepad1.left_stick_y) + Math.abs(gamepad1.right_stick_x) + Math.abs(gamepad1.right_stick_y) == 0.0) {
                 drive.drive(gamepad2.right_stick_x * 0.3, gamepad2.right_stick_y * 0.3, gamepad2.left_stick_x * 0.3, gamepad2.left_stick_y * 0.3);
@@ -94,47 +79,17 @@ public class DriverControlledOpMode extends LinearOpMode {
                 drive.drive(gamepad1.right_stick_x, gamepad1.right_stick_y, gamepad1.left_stick_x, gamepad1.left_stick_y);
             }
 
-            /* if (gamepad2.dpad_up) {
-                arm.up();
-            } else {
-                arm.neutral();
-            }
-            if (gamepad2.dpad_down) {
-                arm.down();
-            } else {
-                arm.neutral();
-            }
+            if (gamepad2.right_trigger > 0) arm.up(gamepad2.right_trigger);
+            else if (gamepad1.right_trigger > 0) arm.up(gamepad1.right_trigger);
 
-            if (gamepad2.left_bumper) {
+            if (gamepad1.right_bumper || gamepad2.right_bumper) arm.neutral();
+
+            if (gamepad1.left_bumper || gamepad2.left_bumper) {
                 arm.open();
             } else {
                 arm.close();
             }
 
-            if (gamepad1.dpad_up) {
-                arm.up();
-            } else {
-                arm.neutral();
-            }
-            if (gamepad1.dpad_down) {
-                arm.down();
-            } else {
-                arm.neutral();
-            }
-
-            if (gamepad1.left_bumper) {
-                arm.open();
-            } else {
-                arm.close();
-            }
-
-            if (gamepad1.left_bumper) {
-                carousel.on();
-            } else {
-                carousel.off();
-            } */
-
-            // Show the elapsed game time and wheel power.
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.update();
         }
