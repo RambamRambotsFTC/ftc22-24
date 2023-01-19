@@ -22,7 +22,7 @@ class MecanumWheels {
 
         frontLeft.setDirection(Direction.FORWARD);
         frontRight.setDirection(Direction.FORWARD);
-        backLeft.setDirection(Direction.REVERSE);
+        backLeft.setDirection(Direction.FORWARD);
         backRight.setDirection(Direction.FORWARD);
     }
 
