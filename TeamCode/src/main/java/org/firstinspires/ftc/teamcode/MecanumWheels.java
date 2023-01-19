@@ -1,8 +1,8 @@
 package org.firstinspires.ftc.teamcode;
-    import com.qualcomm.robotcore.hardware.CRServo;
-    import com.qualcomm.robotcore.hardware.DcMotor;
-    import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
-    import com.qualcomm.robotcore.util.Range;
+
+import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
+import com.qualcomm.robotcore.util.Range;
 
 class MecanumWheels {
     private DcMotor frontRight;
@@ -11,10 +11,10 @@ class MecanumWheels {
     private double frontLeftPower = 0;
     private DcMotor backRight;
     private double backRightPower = 0;
-    private CRServo backLeft;
+    private DcMotor backLeft;
     private double backLeftPower = 0;
 
-    public MecanumWheels (CRServo leftBack, DcMotor leftFront, DcMotor rightBack, DcMotor rightFront) {
+    public MecanumWheels (DcMotor leftBack, DcMotor leftFront, DcMotor rightBack, DcMotor rightFront) {
         frontRight = rightFront;
         frontLeft = leftFront;
         backRight = rightBack;
