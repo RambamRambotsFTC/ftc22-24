@@ -17,7 +17,7 @@ public class Arm {
         this.motor1 = motor1;
         this.motor2 = motor2;
 
-        motor1.setDirection(Direction.REVERSE);
+        motor1.setDirection(Direction.FORWARD);
         motor2.setDirection(Direction.FORWARD);
     }
 
