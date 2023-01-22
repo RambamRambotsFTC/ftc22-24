@@ -75,24 +75,13 @@ public class AutoOpMode extends LinearOpMode {
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
                     if (tag.id == 0) {
-                        runtime.reset();
-                        drive.drive(-1, 0, -1, 0);
-                        while (runtime.milliseconds() < 1000) { }
-                        drive.drive(0, -1, 0, -1);
-                        while (runtime.milliseconds() < 2000) { }
-                        drive.drive(0, 0, 0, 0);
+                        drive.left(1);
+                        drive.forward(1);
                     } else if (tag.id == 19) {
-                        runtime.reset();
-                        drive.drive(0, -1, 0, -1);
-                        while (runtime.milliseconds() < 750) { }
-                        drive.drive(0, 0, 0, 0);
+                        drive.forward(1);
                     } else if (tag.id == 242) {
-                        runtime.reset();
-                        drive.drive(1, 0, 1, 0);
-                        while (runtime.milliseconds() < 1000) { }
-                        drive.drive(0, -1, 0, -1);
-                        while (runtime.milliseconds() < 2000) { }
-                        drive.drive(0, 0, 0, 0);
+                        drive.right(1);
+                        drive.forward(1);
                     }
                     stop();
                 }

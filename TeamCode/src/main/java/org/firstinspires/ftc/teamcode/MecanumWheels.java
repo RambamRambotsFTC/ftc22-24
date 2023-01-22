@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
 import com.qualcomm.robotcore.util.Range;
+import com.qualcomm.robotcore.util.ElapsedTime;
 
 class MecanumWheels {
     private DcMotor frontRight;
@@ -13,6 +14,8 @@ class MecanumWheels {
     private double backRightPower = 0;
     private DcMotor backLeft;
     private double backLeftPower = 0;
+
+    private ElapsedTime runtime = new ElapsedTime();
 
     public MecanumWheels (DcMotor leftBack, DcMotor leftFront, DcMotor rightBack, DcMotor rightFront) {
         frontRight = rightFront;
@@ -55,5 +58,33 @@ class MecanumWheels {
         frontLeft.setPower(FL);
         backRight.setPower(BR);
         backLeft.setPower(BL);
+    }
+
+    public void forward(double seconds) {
+        runtime.reset();
+        drive(0, -1, 0, -1);
+        while (runtime.milliseconds() < (seconds * 1000)) { }
+        drive(0, 0, 0, 0);
+    }
+
+    public void backwards(double seconds) {
+        runtime.reset();
+        drive(0, 1, 0, 1);
+        while (runtime.milliseconds() < (seconds * 1000)) { }
+        drive(0, 0, 0, 0);
+    }
+
+    public void left(double seconds) {
+        runtime.reset();
+        drive(-1, 0, -1, 0);
+        while (runtime.milliseconds() < (seconds * 1000)) { }
+        drive(0, 0, 0, 0);
+    }
+
+    public void right(double seconds) {
+        runtime.reset();
+        drive(1, 0, 1, 0);
+        while (runtime.milliseconds() < (seconds * 1000)) { }
+        drive(0, 0, 0, 0);
     }
 }
