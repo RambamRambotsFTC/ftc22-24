@@ -51,7 +51,7 @@ captures/
 .idea/modules.xml
 # Comment next line if keeping position of elements in Navigation Editor is relevant for you
 .idea/navEditor.xml
-.idea/jarRepostories.xml
+.idea/jarRepositories.xml
 .idea/compiler.xml
 
 # Keystore files
