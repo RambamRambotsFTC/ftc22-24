@@ -30,7 +30,7 @@ public class Arm {
         motor2.setPower(-0.25);
 
         runtime.reset();
-        while (runtime.milliseconds() < 1500) { }
+        while (runtime.milliseconds() < 750) { }
 
         motor1.setPower(0.0);
         motor2.setPower(0.0);
