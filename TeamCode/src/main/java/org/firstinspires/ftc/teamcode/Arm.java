@@ -36,6 +36,6 @@ public class Arm {
         motor2.setPower(0.0);
     }
 
-    public void open() { servo.setPosition(1.0); }
-    public void close() { servo.setPosition(0.0); }
+    public void open() { servo.setPosition(0.0); }
+    public void close() { servo.setPosition(1.0); }
 }
