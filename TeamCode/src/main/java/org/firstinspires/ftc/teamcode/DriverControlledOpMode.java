@@ -46,7 +46,7 @@ public class DriverControlledOpMode extends LinearOpMode {
 
         while (opModeIsActive()) {
             if (Math.abs(gamepad1.left_stick_x) + Math.abs(gamepad1.left_stick_y) + Math.abs(gamepad1.right_stick_x) + Math.abs(gamepad1.right_stick_y) == 0.0) {
-                drive.drive(gamepad2.right_stick_x * 0.3, gamepad2.right_stick_y * 0.3, gamepad2.left_stick_x * 0.3, gamepad2.left_stick_y * 0.3);
+                drive.drive(gamepad2.right_stick_x, gamepad2.right_stick_y, gamepad2.left_stick_x, gamepad2.left_stick_y);
             } else {
                 drive.drive(gamepad1.right_stick_x * 0.8, gamepad1.right_stick_y * 0.8, gamepad1.left_stick_x * 0.8, gamepad1.left_stick_y * 0.8);
             }
