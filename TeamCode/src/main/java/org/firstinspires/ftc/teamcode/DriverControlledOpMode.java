@@ -65,7 +65,26 @@ public class DriverControlledOpMode extends LinearOpMode {
             }
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
+            telemetry.addData("Front Right Wheel", rightFrontMotor.getPower());
+            telemetry.addData("Front Left Wheel", leftFrontMotor.getPower());
+            telemetry.addData("Back Right Wheel", rightBackMotor.getPower());
+            telemetry.addData("Back Left Wheel", leftBackMotor.getPower());
+            telemetry.addData("Direction", getDriveDirection(rightFrontMotor.getPower(), leftFrontMotor.getPower(), rightBackMotor.getPower(), leftBackMotor.getPower()));
+            telemetry.addData("Arm Motor 1", armMotor1.getPower());
+            telemetry.addData("Arm Motor 2", armMotor2.getPower());
+            telemetry.addData("Servo Position", armServo.getPosition());
             telemetry.update();
         }
+    }
+
+    public String getDriveDirection(double FR, double FL, double BR, double BL) {
+        if (FR > 0 && FL < 0 && BR > 0 && BL < 0) return "Forward";
+        else if (FR < 0 && FL > 0 && BR < 0 && BL > 0) return "Backwards";
+        else if (FR > 0 && FL > 0 && BR < 0 && BL < 0) return "Left";
+        else if (FR < 0 && FL < 0 && BR < 0 && BL < 0) return "Left (in place)";
+        else if (FR < 0 && FL < 0 && BR > 0 && BL > 0) return "Right";
+        else if (FR > 0 && FL > 0 && BR > 0 && BL > 0) return "Right (in place)";
+        else if (FR == 0 && FL == 0 && BR == 0 && BL == 0) return "Not moving";
+        else return "Unable to determine (Ari dumb L)";
     }
 }
