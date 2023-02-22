@@ -53,13 +53,15 @@ public class DriverControlledOpMode extends LinearOpMode {
 
             if (gamepad2.right_trigger > 0) arm.up(gamepad2.right_trigger);
             else if (gamepad1.right_trigger > 0) arm.up(gamepad1.right_trigger);
+            else arm.up(0);
 
             if (gamepad1.right_bumper || gamepad2.right_bumper) arm.neutral();
 
             if (gamepad1.left_bumper || gamepad2.left_bumper) {
-                arm.close();
-            } else {
-                arm.open();
+                while (gamepad1.left_bumper || gamepad2.left_bumper) { }
+
+                if (armServo.getPosition() == 1) arm.open();
+                else arm.close();
             }
 
             telemetry.addData("Status", "Run Time: " + runtime.toString());
