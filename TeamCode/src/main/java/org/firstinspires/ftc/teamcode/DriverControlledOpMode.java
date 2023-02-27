@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
+
 import java.lang.Math;
 
 @TeleOp(name="Driver OpMode", group="Linear Opmode")
@@ -19,8 +19,8 @@ public class DriverControlledOpMode extends LinearOpMode {
     private DcMotor rightFrontMotor;
 
     private Servo armServo;
-    private CRServo armMotor1;
-    private CRServo armMotor2;
+    private DcMotor armMotor1;
+    private DcMotor armMotor2;
 
     private ElapsedTime runtime = new ElapsedTime();
 
@@ -35,8 +35,8 @@ public class DriverControlledOpMode extends LinearOpMode {
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
 
         armServo = hardwareMap.get(Servo.class, "armServo");
-        armMotor1 = hardwareMap.get(CRServo.class, "armMotor1");
-        armMotor2 = hardwareMap.get(CRServo.class, "armMotor2");
+        armMotor1 = hardwareMap.get(DcMotor.class, "armMotor1");
+        armMotor2 = hardwareMap.get(DcMotor.class, "armMotor2");
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
         arm = new Arm(armServo, armMotor1, armMotor2);

@@ -3,15 +3,15 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvCameraRotation;
 import org.openftc.easyopencv.OpenCvInternalCamera;
+import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
@@ -26,8 +26,8 @@ public class AutoOpMode extends LinearOpMode {
     private DcMotor rightFrontMotor;
 
     private Servo armServo;
-    private CRServo armMotor1;
-    private CRServo armMotor2;
+    private DcMotor armMotor1;
+    private DcMotor armMotor2;
 
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;
@@ -45,14 +45,14 @@ public class AutoOpMode extends LinearOpMode {
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
 
         armServo = hardwareMap.get(Servo.class, "armServo");
-        armMotor1 = hardwareMap.get(CRServo.class, "armMotor1");
-        armMotor2 = hardwareMap.get(CRServo.class, "armMotor2");
+        armMotor1 = hardwareMap.get(DcMotor.class, "armMotor1");
+        armMotor2 = hardwareMap.get(DcMotor.class, "armMotor2");
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
         arm = new Arm(armServo, armMotor1, armMotor2);
 
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
-        camera = OpenCvCameraFactory.getInstance().createInternalCamera(OpenCvInternalCamera.CameraDirection.BACK, cameraMonitorViewId);
+        camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(0.166, 580, 580, 400, 220);
 
         camera.setPipeline(aprilTagDetectionPipeline);
