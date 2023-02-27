@@ -10,13 +10,12 @@ import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Autonomous", group="Linear Opmode")
-public class AutoOpMode extends LinearOpMode {
+@Autonomous(name="Auto Right", group="Linear Opmode")
+public class AutoOpModerightside extends LinearOpMode {
     private MecanumWheels drive;
     private Arm arm;
 
@@ -54,7 +53,6 @@ public class AutoOpMode extends LinearOpMode {
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(0.166, 580, 580, 400, 220);
-
         camera.setPipeline(aprilTagDetectionPipeline);
         camera.openCameraDeviceAsync(new OpenCvCamera.AsyncCameraOpenListener() {
             @Override
@@ -75,13 +73,46 @@ public class AutoOpMode extends LinearOpMode {
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
                     if (tag.id == 0) {
-                        drive.left(1);
+                        arm.close();
+                        sleep(2000);
+                        arm.up(.75);
                         drive.forward(1);
+                        sleep(2000);
+                        drive.left(.5);
+                        sleep(2000);
+                        arm.open();
+                        sleep(2000);
+                        drive.left(.5);
+                        sleep(2000);
+                        arm.neutral();
                     } else if (tag.id == 19) {
+                        arm.close();
+                        sleep(2000);
+                        arm.up(.75);
+                        sleep(2000);
                         drive.forward(1);
+                        sleep(2000);
+                        drive.left(.5);
+                        sleep(2000);
+                        arm.open();
+                        sleep(2000);
+                        drive.right(.5);
+                        sleep(1000);
+                        arm.neutral();
                     } else if (tag.id == 242) {
-                        drive.right(1);
+                        arm.close();
+                        sleep(2000);
+                        arm.up(.75);
+                        sleep(2000);
                         drive.forward(1);
+                        sleep(2000);
+                        drive.left(.5);
+                        sleep(2000);
+                        arm.open();
+                        sleep(2000);
+                        drive.right(1.5);
+                        sleep(2000);
+                        arm.neutral();
                     }
                     stop();
                 }

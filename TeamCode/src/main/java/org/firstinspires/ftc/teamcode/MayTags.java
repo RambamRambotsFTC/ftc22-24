@@ -12,7 +12,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name="MayTags bc April fake", group="Linear Opmode")
+@Autonomous(name="Apriltag Test", group="Linear Opmode")
 public class MayTags extends LinearOpMode {
     OpenCvCamera camera;
     AprilTagDetectionPipeline aprilTagDetectionPipeline;

@@ -8,7 +8,7 @@ import com.qualcomm.robotcore.util.ElapsedTime;
 
 import java.lang.Math;
 
-@TeleOp(name="Driver OpMode", group="Linear Opmode")
+@TeleOp(name="Driver Control", group="Linear Opmode")
 public class DriverControlledOpMode extends LinearOpMode {
     private MecanumWheels drive;
     private Arm arm;
