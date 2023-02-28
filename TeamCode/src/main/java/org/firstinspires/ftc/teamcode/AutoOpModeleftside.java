@@ -79,9 +79,10 @@ public class AutoOpModeleftside extends LinearOpMode {
                         arm.close();
                         sleep(2000);
                         arm.up(.75);
-                        drive.forward(1);
+                        drive.forward(2);
+                        drive.backwards(.45);
                         sleep(2000);
-                        drive.right(.5);
+                        drive.right(.45);
                         sleep(2000);
                         arm.open();
                         sleep(2000);
@@ -93,9 +94,10 @@ public class AutoOpModeleftside extends LinearOpMode {
                         sleep(2000);
                         arm.up(.75);
                         sleep(2000);
-                        drive.forward(1);
+                        drive.forward(2);
+                        drive.backwards(.45);
                         sleep(2000);
-                        drive.right(.5);
+                        drive.right(.45);
                         sleep(2000);
                         arm.open();
                         sleep(2000);
@@ -107,9 +109,10 @@ public class AutoOpModeleftside extends LinearOpMode {
                         sleep(2000);
                         arm.up(.75);
                         sleep(2000);
-                        drive.forward(1);
+                        drive.forward(2);
+                        drive.backwards(.45);
                         sleep(2000);
-                        drive.right(.5);
+                        drive.right(.45);
                         sleep(2000);
                         arm.open();
                         sleep(2000);
