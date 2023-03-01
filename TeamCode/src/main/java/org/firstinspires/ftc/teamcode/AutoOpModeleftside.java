@@ -91,6 +91,7 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoLeft(1.5);
                         sleep(2000);
                         arm.neutral();
+                        drive.autoForward(.25);
                         stop();
                     } else if (tag.id == 19) {
                         telemetry.addData("Cone side", "2 Starting the code!");
@@ -98,7 +99,6 @@ public class AutoOpModeleftside extends LinearOpMode {
                         arm.close();
                         sleep(2000);
                         arm.up(.75);
-                        sleep(2000);
                         drive.autoForward(2);
                         drive.autoBackwards(.45);
                         sleep(2000);
@@ -109,6 +109,7 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoLeft(.5);
                         sleep(1000);
                         arm.neutral();
+                        drive.autoForward(.25);
                         stop();
                     } else if (tag.id == 242) {
                         telemetry.addData("Cone side", "3 Starting the code!");
@@ -116,7 +117,6 @@ public class AutoOpModeleftside extends LinearOpMode {
                         arm.close();
                         sleep(2000);
                         arm.up(.75);
-                        sleep(2000);
                         drive.autoForward(2);
                         drive.autoBackwards(.45);
                         sleep(2000);
@@ -127,6 +127,7 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoRight(.5);
                         sleep(2000);
                         arm.neutral();
+                        drive.autoForward(.25);
                         stop();
                     }
                 }
