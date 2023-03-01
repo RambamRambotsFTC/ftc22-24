@@ -91,6 +91,7 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoLeft(1.5);
                         sleep(2000);
                         arm.neutral();
+                        stop();
                     } else if (tag.id == 19) {
                         telemetry.addData("Cone side", "2 Starting the code!");
                         telemetry.update();
@@ -108,6 +109,7 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoLeft(.5);
                         sleep(1000);
                         arm.neutral();
+                        stop();
                     } else if (tag.id == 242) {
                         telemetry.addData("Cone side", "3 Starting the code!");
                         telemetry.update();
@@ -125,8 +127,8 @@ public class AutoOpModeleftside extends LinearOpMode {
                         drive.autoRight(.5);
                         sleep(2000);
                         arm.neutral();
+                        stop();
                     }
-                    stop();
                 }
             }
 
