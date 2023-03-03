@@ -51,9 +51,13 @@ public class DriverControlledOpMode extends LinearOpMode {
                 drive.drive(gamepad1.right_stick_x * 0.8, gamepad1.right_stick_y * 0.8, gamepad1.left_stick_x * 0.8, gamepad1.left_stick_y * 0.8);
             }
 
-            if (gamepad2.right_trigger > 0) arm.up(gamepad2.right_trigger);
-            else if (gamepad1.right_trigger > 0) arm.up(gamepad1.right_trigger);
-            else arm.up(0);
+            if (gamepad2.right_trigger > 0) arm.up(gamepad2.right_trigger * 0.8);
+            else if (gamepad1.right_trigger > 0) arm.up(gamepad1.right_trigger * 0.8);
+            //else arm.up(0);
+
+            if (gamepad2.left_trigger > 0) arm.up(gamepad2.left_trigger-.5);
+            else if (gamepad1.left_trigger > 0) arm.up(gamepad1.left_trigger-.5);
+            //else return;
 
             if (gamepad1.right_bumper || gamepad2.right_bumper) arm.neutral();
 
@@ -70,7 +74,7 @@ public class DriverControlledOpMode extends LinearOpMode {
             telemetry.addData("Back Right Wheel", rightBackMotor.getPower());
             telemetry.addData("Back Left Wheel", leftBackMotor.getPower());
             telemetry.addData("Direction", getDriveDirection(rightFrontMotor.getPower(), leftFrontMotor.getPower(), rightBackMotor.getPower(), leftBackMotor.getPower()));
-            telemetry.addData("Arm Motor 1", armMotor1.getPower());
+            telemetry.addData("Arm Motor 1", armMotor1.getPower() );
             telemetry.addData("Arm Motor 2", armMotor2.getPower());
             telemetry.addData("Servo Position", armServo.getPosition());
             telemetry.update();
