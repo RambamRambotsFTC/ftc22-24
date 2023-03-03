@@ -72,14 +72,14 @@ public class AutoOpModerightside extends LinearOpMode {
 
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
+                    camera.closeCameraDevice();
                     if (tag.id == 0) {
                         telemetry.addData("Cone side", "1 Starting the code!");
                         telemetry.update();
                         arm.close();
                         sleep(2000);
-                        arm.up(.75);
-                        drive.autoForward(2);
-                        drive.autoBackwards(.45);
+                        arm.up(.90);
+                        drive.autoForward(1.1);
                         sleep(2000);
                         drive.autoLeft(.45);
                         sleep(2000);
@@ -88,16 +88,15 @@ public class AutoOpModerightside extends LinearOpMode {
                         drive.autoLeft(.5);
                         sleep(2000);
                         arm.neutral();
-                        drive.autoForward(.25);
-                        stop();
+                        drive.autoForward(.05);
+                        sleep(12000);
                     } else if (tag.id == 19) {
                         telemetry.addData("Cone side","2 Starting the code!");
                         telemetry.update();
                         arm.close();
                         sleep(2000);
-                        arm.up(.75);
-                        drive.autoForward(2);
-                        drive.autoBackwards(.45);
+                        arm.up(.90);
+                        drive.autoForward(1.1);
                         sleep(2000);
                         drive.autoLeft(.45);
                         sleep(2000);
@@ -106,28 +105,28 @@ public class AutoOpModerightside extends LinearOpMode {
                         drive.autoRight(.5);
                         sleep(1000);
                         arm.neutral();
-                        drive.autoForward(.25);
-                        stop();
+                        drive.autoForward(.05);
+                        sleep(13000);
                     } else if (tag.id == 242) {
                         telemetry.addData("Cone side","3 Starting the code!");
                         telemetry.update();
                         arm.close();
                         sleep(2000);
-                        arm.up(.75);
-                        drive.autoForward(2);
-                        drive.autoBackwards(.45);
+                        arm.up(.90);
+                        drive.autoForward(1.2);
                         sleep(2000);
                         drive.autoLeft(.45);
                         sleep(2000);
                         arm.open();
                         sleep(2000);
-                        drive.autoRight(1.5);
+                        drive.autoBackwards(.1);
+                        sleep(2000);
+                        drive.autoRight(1.75);
                         sleep(2000);
                         arm.neutral();
-                        drive.autoForward(.25);
-                        stop();
+                        drive.autoForward(.05);
+                        sleep(12000);
                     }
-                    stop();
                 }
             }
 
