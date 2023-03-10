@@ -3,19 +3,21 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.apriltag.AprilTagDetection;
+import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
+import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Auto Right", group="Linear Opmode")
-public class AutoOpModerightside extends LinearOpMode {
+@Autonomous(name="Autonomous", group="Linear Opmode")
+public class AutoOpMode extends LinearOpMode {
     private MecanumWheels drive;
     private Arm arm;
 
@@ -49,7 +51,6 @@ public class AutoOpModerightside extends LinearOpMode {
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
         arm = new Arm(armServo, armMotor1, armMotor2);
-
         int cameraMonitorViewId = hardwareMap.appContext.getResources().getIdentifier("cameraMonitorViewId", "id", hardwareMap.appContext.getPackageName());
         camera = OpenCvCameraFactory.getInstance().createWebcam(hardwareMap.get(WebcamName.class, "Webcam 1"), cameraMonitorViewId);
         aprilTagDetectionPipeline = new AprilTagDetectionPipeline(0.166, 580, 580, 400, 220);
@@ -72,61 +73,17 @@ public class AutoOpModerightside extends LinearOpMode {
 
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
-                    camera.closeCameraDevice();
                     if (tag.id == 0) {
-                        telemetry.addData("Cone side", "1 Starting the code!");
-                        telemetry.update();
-                        arm.close();
-                        sleep(2000);
-                        arm.up(.90);
-                        drive.autoForward(1.1);
-                        sleep(2000);
-                        drive.autoLeft(.45);
-                        sleep(2000);
-                        arm.open();
-                        sleep(2000);
-                        drive.autoLeft(.5);
-                        sleep(2000);
-                        arm.neutral();
-                        drive.autoForward(.05);
-                        sleep(12000);
+                        drive.forward(1.2);
+                        drive.left(1);
+                        drive.forward(.2);
                     } else if (tag.id == 19) {
-                        telemetry.addData("Cone side","2 Starting the code!");
-                        telemetry.update();
-                        arm.close();
-                        sleep(2000);
-                        arm.up(.90);
-                        drive.autoForward(1.1);
-                        sleep(2000);
-                        drive.autoLeft(.45);
-                        sleep(2000);
-                        arm.open();
-                        sleep(2000);
-                        drive.autoRight(.5);
-                        sleep(1000);
-                        arm.neutral();
-                        drive.autoForward(.05);
-                        sleep(13000);
+                        drive.forward(1);
                     } else if (tag.id == 242) {
-                        telemetry.addData("Cone side","3 Starting the code!");
-                        telemetry.update();
-                        arm.close();
-                        sleep(2000);
-                        arm.up(.90);
-                        drive.autoForward(1.2);
-                        sleep(2000);
-                        drive.autoLeft(.45);
-                        sleep(2000);
-                        arm.open();
-                        sleep(2000);
-                        drive.autoBackwards(.1);
-                        sleep(2000);
-                        drive.autoRight(1.75);
-                        sleep(2000);
-                        arm.neutral();
-                        drive.autoForward(.05);
-                        sleep(12000);
+                        drive.right(.95);
+                        drive.forward(1);
                     }
+                    stop();
                 }
             }
 
