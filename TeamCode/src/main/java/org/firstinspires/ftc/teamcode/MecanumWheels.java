@@ -87,48 +87,7 @@ class MecanumWheels {
         while (runtime.milliseconds() < (seconds * 1000)) { }
         drive(0, 0, 0, 0);
     }
-    public void autoForward(double seconds) {
-        frontRight.setPower(.5);
-        frontLeft.setPower(.5);
-        backRight.setPower(.5);
-        backLeft.setPower(.5);
 
-        runtime.reset();
-        drive(0, -1, 0, -1);
-        while (runtime.milliseconds() < (seconds * 1000)) { }
-        drive(0, 0, 0, 0);
-    }
 
-    public void autoBackwards(double seconds) {
-        frontRight.setPower(.5);
-        frontLeft.setPower(.5);
-        backRight.setPower(.5);
-        backLeft.setPower(.5);
-        runtime.reset();
-        drive(0, 1, 0, 1);
-        while (runtime.milliseconds() < (seconds * 1000)) { }
-        drive(0, 0, 0, 0);
-    }
 
-    public void autoLeft(double seconds) {
-        frontRight.setPower(.5);
-        frontLeft.setPower(.5);
-        backRight.setPower(.5);
-        backLeft.setPower(.5);
-        runtime.reset();
-        drive(-1, 0, -1, 0);
-        while (runtime.milliseconds() < (seconds * 1000)) { }
-        drive(0, 0, 0, 0);
-    }
-
-    public void autoRight(double seconds) {
-        frontRight.setPower(.5);
-        frontLeft.setPower(.5);
-        backRight.setPower(.5);
-        backLeft.setPower(.5);
-        runtime.reset();
-        drive(1, 0, 1, 0);
-        while (runtime.milliseconds() < (seconds * 1000)) { }
-        drive(0, 0, 0, 0);
-    }
 }

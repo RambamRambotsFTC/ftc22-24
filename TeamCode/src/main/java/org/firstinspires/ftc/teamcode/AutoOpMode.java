@@ -60,7 +60,6 @@ public class AutoOpMode extends LinearOpMode {
             public void onOpened() {
                 camera.startStreaming(1280,720, OpenCvCameraRotation.UPRIGHT);
             }
-
             @Override
             public void onError(int errorCode) { }
         });
@@ -70,20 +69,61 @@ public class AutoOpMode extends LinearOpMode {
 
         while (opModeIsActive()) {
             ArrayList<AprilTagDetection> currentDetections = aprilTagDetectionPipeline.getLatestDetections();
-
             if (currentDetections.size() != 0) {
                 for (AprilTagDetection tag : currentDetections) {
-                    if (tag.id == 0) {
-                        drive.forward(1.2);
-                        drive.left(1);
+                    camera.stopStreaming();
+                    if (tag.id == 0 && opModeIsActive()) {
+                        arm.close();
+                        runtime.reset();
+                        while (runtime.milliseconds() < 2000 ) {};
+                        arm.up(.85);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.forward(1.10);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.left(.7);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.open();
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.left(.4);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.neutral();
+                        requestOpModeStop();
+                    } else if (tag.id == 19 && opModeIsActive()) {
+                        arm.close();
+                        runtime.reset();
+                        while (runtime.milliseconds() < 2000 ) {};
+                        arm.up(.85);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.forward(1.10);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.left(.7);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.open();
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.right(.7);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.neutral();
                         drive.forward(.2);
-                    } else if (tag.id == 19) {
-                        drive.forward(1);
-                    } else if (tag.id == 242) {
-                        drive.right(.95);
-                        drive.forward(1);
+                        requestOpModeStop();
+                    } else if (tag.id == 242 && opModeIsActive()) {
+                        arm.close();
+                        runtime.reset();
+                        while (runtime.milliseconds() < 2000 ) {};
+                        arm.up(.85);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.forward(1.10);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        drive.left(.7);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.open();
+                        runtime.reset();
+                        while (runtime.milliseconds() < 3000 ) {};
+                        drive.right(1.9);
+                        while (runtime.milliseconds() < 1000 ) {};
+                        arm.neutral();
+                        requestOpModeStop();
                     }
-                    stop();
+
                 }
             }
 
