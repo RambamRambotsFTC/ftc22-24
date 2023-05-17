@@ -14,7 +14,7 @@ import org.openftc.easyopencv.OpenCvCameraRotation;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Auto L", group="Linear Opmode")
+@Autonomous(name="Auto Left", group="Linear Opmode")
 public class AutoOpModeL extends LinearOpMode {
     private MecanumWheels drive;
     private Arm arm;
