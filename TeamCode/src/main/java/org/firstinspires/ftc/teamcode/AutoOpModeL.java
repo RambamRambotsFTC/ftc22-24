@@ -1,23 +1,21 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.hardware.Servo;
-import com.qualcomm.robotcore.hardware.CRServo;
+import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.qualcomm.robotcore.hardware.DcMotor;
+import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.ElapsedTime;
 
-import org.openftc.apriltag.AprilTagDetection;
 import org.firstinspires.ftc.robotcore.external.hardware.camera.WebcamName;
+import org.openftc.apriltag.AprilTagDetection;
 import org.openftc.easyopencv.OpenCvCamera;
 import org.openftc.easyopencv.OpenCvCameraFactory;
 import org.openftc.easyopencv.OpenCvCameraRotation;
-import org.openftc.easyopencv.OpenCvInternalCamera;
 
 import java.util.ArrayList;
 
-@Autonomous(name="Auto Right", group="Linear Opmode")
-public class AutoOpMode extends LinearOpMode {
+@Autonomous(name="Auto L", group="Linear Opmode")
+public class AutoOpModeL extends LinearOpMode {
     private MecanumWheels drive;
     private Arm arm;
 
@@ -73,54 +71,28 @@ public class AutoOpMode extends LinearOpMode {
                 for (AprilTagDetection tag : currentDetections) {
                     camera.stopStreaming();
                     if (tag.id == 0 && opModeIsActive()) {
-                        arm.close();
                         runtime.reset();
-                        while (runtime.milliseconds() < 2000 ) {};
-                        arm.up(.85);
                         while (runtime.milliseconds() < 1000 ) {};
                         drive.forward(1.10);
                         while (runtime.milliseconds() < 1000 ) {};
+                        arm.up(.85);
+                        while (runtime.milliseconds() < 1000 ) {};
                         drive.left(.7);
                         while (runtime.milliseconds() < 1000 ) {};
-                        arm.open();
-                        while (runtime.milliseconds() < 1000 ) {};
                         drive.left(.4);
-                        while (runtime.milliseconds() < 1000 ) {};
                         arm.neutral();
                         requestOpModeStop();
                     } else if (tag.id == 19 && opModeIsActive()) {
-                        arm.close();
-                        runtime.reset();
-                        while (runtime.milliseconds() < 2000 ) {};
-                        arm.up(.85);
-                        while (runtime.milliseconds() < 1000 ) {};
                         drive.forward(1.10);
+                        runtime.reset();
                         while (runtime.milliseconds() < 1000 ) {};
-                        drive.left(.7);
-                        while (runtime.milliseconds() < 1000 ) {};
-                        arm.open();
-                        while (runtime.milliseconds() < 1000 ) {};
-                        drive.right(.7);
-                        while (runtime.milliseconds() < 1000 ) {};
-                        arm.neutral();
                         drive.forward(.2);
                         requestOpModeStop();
                     } else if (tag.id == 242 && opModeIsActive()) {
-                        arm.close();
-                        runtime.reset();
-                        while (runtime.milliseconds() < 2000 ) {};
-                        arm.up(.85);
-                        while (runtime.milliseconds() < 1000 ) {};
                         drive.forward(1.10);
-                        while (runtime.milliseconds() < 1000 ) {};
-                        drive.left(.7);
-                        while (runtime.milliseconds() < 1000 ) {};
-                        arm.open();
                         runtime.reset();
                         while (runtime.milliseconds() < 3000 ) {};
-                        drive.right(1.9);
-                        while (runtime.milliseconds() < 1000 ) {};
-                        arm.neutral();
+                        drive.right(1.2);
                         requestOpModeStop();
                     }
 
