@@ -56,6 +56,10 @@ public class DriverControlledOpMode extends LinearOpMode {
         else if (FR < 0 && FL < 0 && BR < 0 && BL < 0) return "Left (in place)";
         else if (FR < 0 && FL < 0 && BR > 0 && BL > 0) return "Right";
         else if (FR > 0 && FL > 0 && BR > 0 && BL > 0) return "Right (in place)";
+        else if (FR == 0 && FL < 0 && BR == 0 && BL < 0) return "Forwards right rotation";
+        else if (FR == 0 && FL > 0 && BR == 0 && BL > 0) return "Backwards right rotation";
+        else if (FR > 0 && FL == 0 && BR > 0 && BL == 0) return "Forwards left rotation";
+        else if (FR < 0 && FL == 0 && BR < 0 && BL == 0) return "Backwards left rotation";
         else if (FR == 0 && FL == 0 && BR == 0 && BL == 0) return "Not moving";
         else return "Unable to determine (Ari dumb L)";
     }
