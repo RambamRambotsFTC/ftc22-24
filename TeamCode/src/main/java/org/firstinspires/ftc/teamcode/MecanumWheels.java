@@ -34,16 +34,16 @@ class MecanumWheels {
         if (rx >= 0.25 || lx >= 0.25) {
             double lrx = (rx + lx) / 2;
             FR += -lrx;
-            FL += -lrx;
+            FL += lrx;
             BR += lrx;
-            BL += lrx;
+            BL += -lrx;
         }
         if (lx <= -0.25 || rx <= -0.25) {
             double llx = (rx + lx) / 2;
             FR += -llx;
-            FL += -llx;
+            FL += llx;
             BR += llx;
-            BL += llx;
+            BL += -llx;
         }
         FR = Range.clip(FR, -1, 1);
         FL = Range.clip(FL, -1, 1);
