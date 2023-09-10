@@ -22,9 +22,9 @@ public class DriverControlledOpMode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBack");
+        leftBackMotor = hardwareMap.get(DcMotor.class, "leftRear");
         leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFront");
-        rightBackMotor = hardwareMap.get(DcMotor.class, "rightBack");
+        rightBackMotor = hardwareMap.get(DcMotor.class, "rightRear");
         rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFront");
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
