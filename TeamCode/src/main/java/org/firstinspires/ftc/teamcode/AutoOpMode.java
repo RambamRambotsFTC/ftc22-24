@@ -21,10 +21,10 @@ public class AutoOpMode extends LinearOpMode {
         telemetry.addData("Status", "Initialized");
         telemetry.update();
 
-        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBackMotor");
-        leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFrontMotor");
-        rightBackMotor = hardwareMap.get(DcMotor.class, "rightBackMotor");
-        rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFrontMotor");
+        leftBackMotor = hardwareMap.get(DcMotor.class, "leftBack");
+        leftFrontMotor = hardwareMap.get(DcMotor.class, "leftFront");
+        rightBackMotor = hardwareMap.get(DcMotor.class, "rightBack");
+        rightFrontMotor = hardwareMap.get(DcMotor.class, "rightFront");
 
         drive = new MecanumWheels(leftBackMotor, leftFrontMotor, rightBackMotor, rightFrontMotor);
 

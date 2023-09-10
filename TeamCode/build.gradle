@@ -13,9 +13,7 @@
 buildscript {
     repositories {
         mavenCentral()
-        maven {
-            url = 'https://www.matthewo.tech/maven/'
-        }
+        maven { url = 'https://www.matthewo.tech/maven/' }
     }
     dependencies {
         classpath 'org.team11260:fast-load-plugin:0.1'
@@ -36,13 +34,14 @@ android {
 }
 
 repositories {
-    maven {
-        url = 'https://www.matthewo.tech/maven/'
-    }
+    maven { url = 'https://www.matthewo.tech/maven/' }
+    maven { url = 'https://maven.brott.dev/' }
 }
+
 
 dependencies {
     implementation project(':FtcRobotController')
     implementation 'org.team11260:fast-load:0.1'
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
+    implementation "com.acmerobotics.roadrunner:ftc:0.1.2"
 }
