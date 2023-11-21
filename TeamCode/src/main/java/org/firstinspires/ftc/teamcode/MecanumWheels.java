@@ -45,6 +45,8 @@ class MecanumWheels {
             BR += llx;
             BL += -llx;
         }
+        FL *= 1.25;
+        BL *= 1.25;
         FR = Range.clip(FR, -1, 1);
         FL = Range.clip(FL, -1, 1);
         BR = Range.clip(BR, -1, 1);
