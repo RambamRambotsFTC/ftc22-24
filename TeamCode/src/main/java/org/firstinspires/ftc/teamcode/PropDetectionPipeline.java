@@ -1,13 +1,8 @@
-// https://www.youtube.com/watch?v=rWp76RV_Cik bad
 // https://youtu.be/0_w7UTN9LnE
 
 package org.firstinspires.ftc.teamcode;
 
-import org.opencv.core.Core;
-import org.opencv.core.Mat;
-import org.opencv.core.MatOfPoint;
-import org.opencv.core.Rect;
-import org.opencv.core.Scalar;
+import org.opencv.core.*;
 import org.opencv.imgproc.Imgproc;
 import org.openftc.easyopencv.OpenCvPipeline;
 
