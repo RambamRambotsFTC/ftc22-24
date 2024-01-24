@@ -18,7 +18,7 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'org.team11260:fast-load-plugin:0.1.1'
+        classpath 'org.team11260:fast-load-plugin:0.1.2'
     }
 }
 
@@ -43,6 +43,6 @@ repositories {
 
 dependencies {
     implementation project(':FtcRobotController')
-    implementation 'org.team11260:fast-load:0.1.1'
+    implementation 'org.team11260:fast-load:0.1.2'
     annotationProcessor files('lib/OpModeAnnotationProcessor.jar')
 }
