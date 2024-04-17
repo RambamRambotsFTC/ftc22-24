@@ -1,31 +1,32 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.robotcore.hardware.DcMotor;
-import com.qualcomm.robotcore.hardware.DcMotorSimple.Direction;
+import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.Range;
-import com.qualcomm.robotcore.util.ElapsedTime;
 
 class MecanumWheels {
-    private DcMotor leftBackMotor;
-    private DcMotor leftFrontMotor;
-    private DcMotor rightBackMotor;
-    private DcMotor rightFrontMotor;
+    private final DcMotor backLeftMotor, frontLeftMotor, backRightMotor, frontRightMotor;
 
-    private ElapsedTime runtime = new ElapsedTime();
+    public MecanumWheels(DcMotor backLeftMotor, DcMotor frontLeftMotor, DcMotor backRightMotor, DcMotor frontRightMotor) {
+        this.backLeftMotor = backLeftMotor;
+        this.frontLeftMotor = frontLeftMotor;
+        this.backRightMotor = backRightMotor;
+        this.frontRightMotor = frontRightMotor;
 
-    public MecanumWheels(DcMotor leftBackMotor, DcMotor leftFrontMotor, DcMotor rightBackMotor, DcMotor rightFrontMotor) {
-        this.leftBackMotor = leftBackMotor;
-        this.leftFrontMotor = leftFrontMotor;
-        this.rightBackMotor = rightBackMotor;
-        this.rightFrontMotor = rightFrontMotor;
-
-        this.leftBackMotor.setDirection(Direction.FORWARD);
-        this.leftFrontMotor.setDirection(Direction.FORWARD);
-        this.rightBackMotor.setDirection(Direction.FORWARD);
-        this.rightFrontMotor.setDirection(Direction.FORWARD);
+        this.backLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.backLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.backLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        this.frontLeftMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.frontLeftMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.frontLeftMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        this.backRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.backRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.backRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
+        this.frontRightMotor.setDirection(DcMotorSimple.Direction.FORWARD);
+        this.frontRightMotor.setMode(DcMotor.RunMode.STOP_AND_RESET_ENCODER);
+        this.frontRightMotor.setMode(DcMotor.RunMode.RUN_WITHOUT_ENCODER);
     }
 
-    public void drive(double rx, double ry, double lx, double ly) {
+    public void drive(double rx, double ry, double lx, double ly, boolean reverse) {
         double FR = -ry;
         double FL = ly;
         double BR = -ry;
@@ -50,37 +51,36 @@ class MecanumWheels {
         BR = Range.clip(BR, -1, 1);
         BL = Range.clip(BL, -1, 1);
 
-        this.leftBackMotor.setPower(BL);
-        this.leftFrontMotor.setPower(FL);
-        this.rightBackMotor.setPower(BR);
-        this.rightFrontMotor.setPower(FR);
+        backLeftMotor.setPower(reverse ? FR : BL);
+        frontLeftMotor.setPower(reverse ? BR : FL);
+        backRightMotor.setPower(reverse ? FL : BR);
+        frontRightMotor.setPower(reverse ? BL : FR);
     }
 
-    public void forward(double seconds) {
-        runtime.reset();
-        drive(0, -1, 0, -1);
-        while (runtime.milliseconds() < seconds * 1000) { }
-        drive(0, 0, 0, 0);
+    public void driveWithEncoders(double speed, int bl, int fl, int br, int fr) {
+        backLeftMotor.setTargetPosition(backLeftMotor.getCurrentPosition() + bl);
+        frontLeftMotor.setTargetPosition(frontLeftMotor.getCurrentPosition() + fl);
+        backRightMotor.setTargetPosition(backRightMotor.getCurrentPosition() + br);
+        frontRightMotor.setTargetPosition(frontRightMotor.getCurrentPosition() + fr);
+        backLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontLeftMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        frontRightMotor.setMode(DcMotor.RunMode.RUN_TO_POSITION);
+        backLeftMotor.setPower(speed);
+        frontRightMotor.setPower(speed);
+        backRightMotor.setPower(speed);
+        frontLeftMotor.setPower(speed);
+        while (backLeftMotor.isBusy() || backRightMotor.isBusy() || frontLeftMotor.isBusy() || frontRightMotor.isBusy());
+        frontLeftMotor.setPower(0);
+        backRightMotor.setPower(0);
+        frontRightMotor.setPower(0);
+        backLeftMotor.setPower(0);
     }
 
-    public void backwards(double seconds) {
-        runtime.reset();
-        drive(0, 1, 0, 1);
-        while (runtime.milliseconds() < seconds * 1000) { }
-        drive(0, 0, 0, 0);
-    }
-
-    public void left(double seconds) {
-        runtime.reset();
-        drive(-1, 0, -1, 0);
-        while (runtime.milliseconds() < seconds * 1000) { }
-        drive(0, 0, 0, 0);
-    }
-
-    public void right(double seconds) {
-        runtime.reset();
-        drive(1, 0, 1, 0);
-        while (runtime.milliseconds() < seconds * 1000) { }
-        drive(0, 0, 0, 0);
-    }
+    public void forwards(double speed, int amount) { driveWithEncoders(speed, -amount, -amount, amount, amount); }
+    public void backwards(double speed, int amount) { driveWithEncoders(speed, amount, amount, -amount, -amount); }
+    public void left(double speed, int amount) { driveWithEncoders(speed, -amount, amount, -amount, amount); }
+    public void right(double speed, int amount) { driveWithEncoders(speed, amount, -amount, amount, -amount); }
+    public void turnLeft(double speed, int amount) { driveWithEncoders(speed, amount, amount, amount, amount); }
+    public void turnRight(double speed, int amount) { driveWithEncoders(speed, -amount, -amount, -amount, -amount); }
 }

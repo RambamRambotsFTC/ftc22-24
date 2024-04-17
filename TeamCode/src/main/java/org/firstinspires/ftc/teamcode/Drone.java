@@ -7,6 +7,6 @@ public class Drone {
 
     public Drone(Servo droneServo) { this.droneServo = droneServo; }
 
-    public void launch() { droneServo.setPosition(0); }
-    public void reset() { droneServo.setPosition(1); }
+    public void launch() { droneServo.setPosition(0.4); }
+    public void reset() { droneServo.setPosition(0); }
 }

@@ -9,8 +9,10 @@ import org.openftc.easyopencv.OpenCvPipeline;
 import java.util.*;
 
 public class PropDetectionPipeline extends OpenCvPipeline {
+    public static final int NONE = -1, LEFT = 0, MIDDLE = 1, RIGHT = 2;
+
     boolean checkRed;
-    private int biggestBlob = -1;
+    private int biggestBlob = NONE;
 
     public PropDetectionPipeline(boolean checkRed) { this.checkRed = checkRed; }
 
@@ -18,9 +20,9 @@ public class PropDetectionPipeline extends OpenCvPipeline {
 
     @Override
     public Mat processFrame(Mat input) {
-        Rect left = new Rect(1, 1, (1280 / 3) - 1, 719);
-        Rect middle = new Rect(1280 / 3, 1, (1280 / 3) - 1, 719);
-        Rect right = new Rect((1280 / 3) * 2, 1, (1280 / 3) - 1, 719);
+        Rect left = new Rect(0, 300, 1280 / 3, 300);
+        Rect middle = new Rect(1280 / 3 + 1, 300, 1280 / 3, 300);
+        Rect right = new Rect(1280 / 3 * 2 + 2, 300, 1280 / 3, 300);
         Imgproc.rectangle(input, left, new Scalar(0, 255, 0), 2);
         Imgproc.rectangle(input, middle, new Scalar(0, 255, 0), 2);
         Imgproc.rectangle(input, right, new Scalar(0, 255, 0), 2);
@@ -29,6 +31,7 @@ public class PropDetectionPipeline extends OpenCvPipeline {
 
         Mat[] segregatedMats = { mask.submat(left), mask.submat(middle), mask.submat(right) };
         Mat[] segregatedMatsColor = { input.submat(left), input.submat(middle), input.submat(right) };
+        mask.release();
         double[] areas = new double[3];
 
         for (int i = 0; i < segregatedMats.length; i++) {
@@ -41,19 +44,18 @@ public class PropDetectionPipeline extends OpenCvPipeline {
             if (largestContour != null) {
                 Imgproc.drawContours(segregatedMatsColor[i], contours, -1, checkRed ? new Scalar(0, 0, 155) : new Scalar(155, 0, 0), 5);
                 Imgproc.drawContours(segregatedMatsColor[i], contours, contours.indexOf(largestContour), checkRed ? new Scalar(0, 0, 255) : new Scalar(255, 0, 0), 5);
-                areas[i] = Imgproc.boundingRect(largestContour).area();
+                areas[i] = Imgproc.contourArea(largestContour);
             } else areas[i] = 0;
             segregatedMats[i].release();
         }
         Core.hconcat(Arrays.asList(segregatedMatsColor), input);
         for (Mat mat : segregatedMatsColor) mat.release();
-        mask.release();
 
         double greatest = Math.max(areas[0], (Math.max(areas[1], areas[2])));
-        if (greatest == 0) biggestBlob = -1;
-        else if (greatest == areas[0]) biggestBlob = 0;
-        else if (greatest == areas[1]) biggestBlob = 1;
-        else if (greatest == areas[2]) biggestBlob = 2;
+        if (greatest == 0) biggestBlob = NONE;
+        else if (greatest == areas[0]) biggestBlob = LEFT;
+        else if (greatest == areas[1]) biggestBlob = MIDDLE;
+        else if (greatest == areas[2]) biggestBlob = RIGHT;
 
         return input;
     }
