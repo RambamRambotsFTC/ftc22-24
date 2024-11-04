@@ -4,43 +4,40 @@ import com.qualcomm.robotcore.hardware.*;
 import com.qualcomm.robotcore.util.Range;
 
 class MecanumWheels {
-    private final DcMotor frontLeftMotor, backLeftMotor, frontRightMotor, backRightMotor;
+    private final DcMotor leftFront, leftBack, rightBack, rightFront;
 
-    public MecanumWheels(DcMotor frontLeftMotor, DcMotor frontRightMotor, DcMotor backLeftMotor, DcMotor backRightMotor) {
-        this.frontLeftMotor = frontLeftMotor;
-        this.frontRightMotor = frontRightMotor;
-        this.backLeftMotor = backLeftMotor;
-        this.backRightMotor = backRightMotor;
+    public MecanumWheels(DcMotor leftFront, DcMotor leftBack, DcMotor rightBack, DcMotor rightFront) {
+        this.leftFront = leftFront;
+        this.leftBack = leftBack;
+        this.rightBack = rightBack;
+        this.rightFront = rightFront;
     }
 
     public void drive(double lx, double ly, double rx, double ry, boolean reverse) {
-        double FR = -ry;
-        double FL = ly;
-        double BR = -ry;
-        double BL = ly;
+        double LF = ly, LB = ly, RB = -ry, RF = -ry;
 
         if (rx >= 0.25 || lx >= 0.25) {
             double lrx = (rx + lx) / 2;
-            FR += -lrx;
-            FL += -lrx;
-            BR += lrx;
-            BL += lrx;
+            LF += -lrx;
+            LB += lrx;
+            RB += lrx;
+            RF += -lrx;
         }
         if (lx <= -0.25 || rx <= -0.25) {
             double llx = (rx + lx) / 2;
-            FR += -llx;
-            FL += -llx;
-            BR += llx;
-            BL += llx;
+            LF += -llx;
+            LB += llx;
+            RB += llx;
+            RF += -llx;
         }
-        FR = Range.clip(FR, -1, 1);
-        FL = Range.clip(FL, -1, 1);
-        BR = Range.clip(BR, -1, 1);
-        BL = Range.clip(BL, -1, 1);
+        LF = Range.clip(LF, -1, 1);
+        LB = Range.clip(LB, -1, 1);
+        RB = Range.clip(RB, -1, 1);
+        RF = Range.clip(RF, -1, 1);
 
-        backLeftMotor.setPower(reverse ? FR : BL);
-        frontLeftMotor.setPower(reverse ? BR : FL);
-        backRightMotor.setPower(reverse ? FL : BR);
-        frontRightMotor.setPower(reverse ? BL : FR);
+        leftFront.setPower(reverse ? RB : LF);
+        leftBack.setPower(reverse ? RF : LB);
+        rightBack.setPower(reverse ? LF : RB);
+        rightFront.setPower(reverse ? LB : RF);
     }
 }

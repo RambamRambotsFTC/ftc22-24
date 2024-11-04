@@ -7,19 +7,22 @@ import com.qualcomm.robotcore.hardware.*;
 public class AutoOpMode extends LinearOpMode {
     MecanumWheels drive;
 
-    DcMotor frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor;
+    DcMotor leftFront, leftBack, rightBack, rightFront, slideMotor, slideAngleMotor;
+    Servo clawServo;
 
     @Override
     public void runOpMode() {
-        telemetry.addData("Status", "Initialized");
-        telemetry.update();
+        leftFront = hardwareMap.get(DcMotor.class, "leftFront");
+        leftBack = hardwareMap.get(DcMotor.class, "leftBack");
+        rightBack = hardwareMap.get(DcMotor.class, "rightBack");
+        rightFront = hardwareMap.get(DcMotor.class, "rightFront");
+        slideMotor = hardwareMap.get(DcMotor.class, "slideMotor");
+        slideAngleMotor = hardwareMap.get(DcMotor.class, "slideAngleMotor");
 
-        frontLeftMotor = hardwareMap.get(DcMotor.class, "frontLeftMotor");
-        frontRightMotor = hardwareMap.get(DcMotor.class, "frontRightMotor");
-        backLeftMotor = hardwareMap.get(DcMotor.class, "backLeftMotor");
-        backRightMotor = hardwareMap.get(DcMotor.class, "backRightMotor");
+        drive = new MecanumWheels(leftFront, leftBack, rightBack, rightFront);
+        arm = new Arm(slideMotor, slideAngleMotor, clawServo);
 
-        drive = new MecanumWheels(frontLeftMotor, frontRightMotor, backLeftMotor, backRightMotor);
+
 
         waitForStart();
     }
