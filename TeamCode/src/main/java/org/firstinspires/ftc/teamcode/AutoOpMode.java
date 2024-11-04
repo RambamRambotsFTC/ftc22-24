@@ -6,6 +6,7 @@ import com.qualcomm.robotcore.hardware.*;
 @Autonomous(name="Autonomous", group="Autonomous")
 public class AutoOpMode extends LinearOpMode {
     MecanumWheels drive;
+    Arm arm;
 
     DcMotor leftFront, leftBack, rightBack, rightFront, slideMotor, slideAngleMotor;
     Servo clawServo;
