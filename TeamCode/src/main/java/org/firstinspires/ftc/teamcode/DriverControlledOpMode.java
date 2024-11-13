@@ -62,11 +62,6 @@ public class DriverControlledOpMode extends LinearOpMode {
                 arm.open();
             }
 
-            if (gamepad1.dpad_up || gamepad2.dpad_up) {
-                while (gamepad1.dpad_up || gamepad2.dpad_up);
-                arm.setAngle(Math.PI / 12);
-            }
-
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front Left Wheel", leftFront.getPower());
             telemetry.addData("Back Left Wheel", leftBack.getPower());
