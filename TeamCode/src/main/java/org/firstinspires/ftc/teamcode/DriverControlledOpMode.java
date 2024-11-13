@@ -43,10 +43,10 @@ public class DriverControlledOpMode extends LinearOpMode {
             else
                 drive.drive(gamepad1.left_stick_x * 0.5, gamepad1.left_stick_y * 0.5, gamepad1.right_stick_x * 0.5, gamepad1.right_stick_y * 0.5, false);
 
-            if (gamepad1.right_trigger > 0) arm.up(gamepad1.right_trigger);
-            else if (gamepad2.right_trigger > 0) arm.up(gamepad2.right_trigger);
-            else if (gamepad1.left_trigger > 0) arm.down(gamepad1.left_trigger * 0.3);
-            else if (gamepad2.left_trigger > 0) arm.down(gamepad2.left_trigger * 0.3);
+            if (gamepad1.right_trigger > 0) arm.extend(gamepad1.right_trigger);
+            else if (gamepad2.right_trigger > 0) arm.extend(gamepad2.right_trigger);
+            else if (gamepad1.left_trigger > 0) arm.retract(gamepad1.left_trigger);
+            else if (gamepad2.left_trigger > 0) arm.retract(gamepad2.left_trigger);
             else arm.neutral();
 
             if (gamepad1.left_bumper || gamepad2.left_bumper) arm.swivelUp(1.0);
@@ -62,15 +62,20 @@ public class DriverControlledOpMode extends LinearOpMode {
                 arm.open();
             }
 
+            if (gamepad1.dpad_up || gamepad2.dpad_up) {
+                while (gamepad1.dpad_up || gamepad2.dpad_up);
+                arm.setAngle(Math.PI / 12);
+            }
+
             telemetry.addData("Status", "Run Time: " + runtime.toString());
             telemetry.addData("Front Left Wheel", leftFront.getPower());
             telemetry.addData("Back Left Wheel", leftBack.getPower());
             telemetry.addData("Back Right Wheel", rightBack.getPower());
             telemetry.addData("Front Right Wheel", rightFront.getPower());
             telemetry.addData("Slide Motor", slideMotor.getPower() + " (use the left/right trigger to control)");
-            telemetry.addData("Slide Motor Encoder", slideMotor.getCurrentPosition());
+            telemetry.addData("Slide Motor Encoder", slideMotor.getCurrentPosition() + "; Length: " + arm.getSlideLength() + " inches");
             telemetry.addData("Slide Angle Motor", slideAngleMotor.getPower() + " (use the left/right shoulder buttons to control)");
-            telemetry.addData("Slide Angle Encoder", slideAngleMotor.getCurrentPosition());
+            telemetry.addData("Slide Angle Encoder", slideAngleMotor.getCurrentPosition() + "; Angle: " + arm.getAngle() + " radians");
             telemetry.addData("Claw", (clawServo.getPosition() == 0 ? "Closed" : "Open") + " (press " + (clawServo.getPosition() == 0 ? "Y" : "X") + " to toggle)");
             telemetry.update();
         }
