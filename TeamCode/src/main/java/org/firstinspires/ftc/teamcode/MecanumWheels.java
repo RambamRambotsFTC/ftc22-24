@@ -11,9 +11,14 @@ class MecanumWheels {
         this.leftBack = leftBack;
         this.rightBack = rightBack;
         this.rightFront = rightFront;
+
+        this.leftFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.leftBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightBack.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
+        this.rightFront.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
     }
 
-    public void drive(double lx, double ly, double rx, double ry, boolean reverse) {
+    public void drive(double lx, double ly, double rx, double ry) {
         double LF = ly, LB = ly, RB = -ry, RF = -ry;
 
         if (rx >= 0.25 || lx >= 0.25) {
@@ -35,9 +40,9 @@ class MecanumWheels {
         RB = Range.clip(RB, -1, 1);
         RF = Range.clip(RF, -1, 1);
 
-        leftFront.setPower(reverse ? RB : LF);
-        leftBack.setPower(reverse ? RF : LB);
-        rightBack.setPower(reverse ? LF : RB);
-        rightFront.setPower(reverse ? LB : RF);
+        leftFront.setPower(LF);
+        leftBack.setPower(LB);
+        rightBack.setPower(RB);
+        rightFront.setPower(RF);
     }
 }
