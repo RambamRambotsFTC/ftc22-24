@@ -5,6 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.*;
 import com.qualcomm.robotcore.hardware.*;
 
 @Config
+@Disabled
 class AutonomousConfig {
     public static Zone zone = Zone.OBSERVATION_ZONE;
     public static Park park = Park.NO_PARK;
