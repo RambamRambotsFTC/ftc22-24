@@ -18,6 +18,7 @@ class AutonomousConfig {
 }
 
 @Autonomous(name="Autonomous", group="Autonomous")
+@Disabled
 public class AutoOpMode extends LinearOpMode {
     MecanumWheels drive;
     Arm arm;
