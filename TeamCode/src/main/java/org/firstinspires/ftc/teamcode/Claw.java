@@ -7,6 +7,6 @@ public class Claw {
 
     public Claw(Servo clawServo) { this.clawServo = clawServo; }
 
-    public void open() { clawServo.setPosition(1.0); }
-    public void close() { clawServo.setPosition(0.0); }
+    public void open() { clawServo.setPosition(0.0); }
+    public void close() { clawServo.setPosition(1.0); }
 }
