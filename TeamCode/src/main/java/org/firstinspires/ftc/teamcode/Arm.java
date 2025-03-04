@@ -27,7 +27,7 @@ public class Arm {
     public static int inchesToTicks(double inches) { return (int)(inches / slideInPerTick); }
     public static double ticksToInches(int ticks) { return (ticks * slideInPerTick); }
 
-    public Arm(DcMotor slideMotor, DcMotor slideAngleMotor, SupportingSlide supportingSlide) {
+    public Arm(DcMotor slideMotor, DcMotor slideAngleMotor /* , SupportingSlide supportingSlide */) {
         this.slideMotor = slideMotor;
         this.slideAngleMotor = slideAngleMotor;
 

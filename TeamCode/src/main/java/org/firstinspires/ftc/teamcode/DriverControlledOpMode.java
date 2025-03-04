@@ -31,7 +31,7 @@ public class DriverControlledOpMode extends LinearOpMode {
         Servo clawServo = hardwareMap.get(Servo.class, "clawServo");
 
         AutoOpMode.RRDrive drive = new AutoOpMode.RRDrive(hardwareMap);
-        Arm arm = new Arm(slideMotor, slideAngleMotor, new SupportingSlide(secondarySlideMotor));
+        Arm arm = new Arm(slideMotor, slideAngleMotor /* , new SupportingSlide(secondarySlideMotor) */);
         AutoOpMode.RRArm zeroingAssist = new AutoOpMode.RRArm(hardwareMap);
         Claw claw = new Claw(clawServo);
 
