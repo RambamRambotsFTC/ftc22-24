@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.*;
 @Config
 public class Arm {
     private final DcMotor slideMotor, slideAngleMotor;
-    private final SupportingSlide supportingSlide;
+    // private final SupportingSlide supportingSlide;
 
     public static double angleGearRatio = 20.0 / 15.0, angleEncoderCountsPerRevolution = 28 * Math.pow(1 + (46.0 / 17.0), 4); // ~5281.1
 //    public static double ANGLE_GEAR_RATIO = 90.0 / 45.0, ANGLE_ENCODER_COUNTS_PER_REVOLUTION = 28 * Math.pow(1 + (46.0 / 17.0), 4); // ~5281.1
@@ -38,7 +38,7 @@ public class Arm {
         this.slideAngleMotor.setDirection(DcMotor.Direction.REVERSE);
         this.slideAngleMotor.setZeroPowerBehavior(DcMotor.ZeroPowerBehavior.BRAKE);
 
-        this.supportingSlide = supportingSlide;
+        // this.supportingSlide = supportingSlide;
     }
 
     public void extend(double power) {
